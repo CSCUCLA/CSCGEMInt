@@ -1,0 +1,3 @@
+[submodule "AnalysisSupport"]
+	path = AnalysisSupport
+	url = https://nickmccoll@github.com/CSCUCLA/AnalysisSupport.git
