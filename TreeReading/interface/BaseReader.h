@@ -1,8 +1,8 @@
 #ifndef CSCGEMINT_TREEREADING_BASEREADER_H
 #define CSCGEMINT_TREEREADING_BASEREADER_H
 #include <string>
-#include "../../../../AnalysisSupport/interface/Types.h"
-using namespace AnalysisSupportTypes;
+#include "AnalysisSupport/Utilities/interface/Types.h"
+using namespace ASTypes;
 
 class TreeReadingWrapper;
 

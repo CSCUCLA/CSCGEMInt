@@ -1,6 +1,6 @@
 #ifndef CSCGEMINT_TREEREADING_BASETUPLEANALYZER_H
 #define CSCGEMINT_TREEREADING_BASETUPLEANALYZER_H
-#include "../../../../AnalysisSupport/macros/TreeReadingWrapper.h"
+#include "AnalysisSupport/TreeInterface/interface/TreeReadingWrapper.h"
 #include "BaseReader.h"
 
 namespace CSCGEMInt {

@@ -2,7 +2,7 @@
 #define CSCGEMINT_TREEREADING_TMBREADER_H
 #include <vector>
 
-#include "../../../AnalyzerBase/TreeReading/interface/BaseReader.h"
+#include "TreeReading/interface/BaseReader.h"
 
 namespace CSCGEMInt{
 class TMBReader : public BaseReader {

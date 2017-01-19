@@ -8,9 +8,12 @@ endif
 
 
 TARGET=libCSCGEMIntTupleAnalysis.so
+
+ASTREEINT = AnalysisSupport/TreeInterface/src
+ASUTILITIES = AnalysisSupport/Utilities/src
 TREEREADING = TreeReading/src
 
-SOURCE = $(wildcard $(TREEREADING)/*.cc)
+SOURCE = $(wildcard $(ASTREEINT)/*.cc) $(wildcard $(ASUTILITIES)/*.cc) $(wildcard $(TREEREADING)/*.cc)
 OBJ=$(join $(addsuffix ../obj/, $(dir $(SOURCE))), $(notdir $(SOURCE:.cc=.o))) 
 DEPENDS=$(join $(addsuffix ../.dep/, $(dir $(SOURCE))), $(notdir $(SOURCE:.cc=.d)))
 
@@ -38,6 +41,28 @@ endif
 	@echo "Compiling $<"
 	$(CXX) $(CXXFLAGS) -c $<  -o $@
 
+$(ASTREEINT)/../obj/%.o : $(ASTREEINT)/%.cc
+	@mkdir -p $(dir $@)
+	@echo "============="
+	@echo "Compiling $<"
+	$(CXX) $(CXXFLAGS) -c $<  -o $@
+$(ASTREEINT)/../.dep/%.d: $(ASTREEINT)/%.cc
+	@mkdir -p $(dir $@)
+	@echo "============="
+	@echo Building dependencies file for $*.o
+	@$(SHELL) -ec '$(CXX) -M $(CXXFLAGS) $< | sed "s^$*.o^$(ASTREEINT)/../obj/$*.o^" > $@'
+	
+$(ASUTILITIES)/../obj/%.o : $(ASUTILITIES)/%.cc
+	@mkdir -p $(dir $@)
+	@echo "============="
+	@echo "Compiling $<"
+	$(CXX) $(CXXFLAGS) -c $<  -o $@
+$(ASUTILITIES)/../.dep/%.d: $(ASUTILITIES)/%.cc
+	@mkdir -p $(dir $@)
+	@echo "============="
+	@echo Building dependencies file for $*.o
+	@$(SHELL) -ec '$(CXX) -M $(CXXFLAGS) $< | sed "s^$*.o^$(ASUTILITIES)/../obj/$*.o^" > $@'
+
 $(TREEREADING)/../obj/%.o : $(TREEREADING)/%.cc
 	@mkdir -p $(dir $@)
 	@echo "============="
@@ -48,6 +73,8 @@ $(TREEREADING)/../.dep/%.d: $(TREEREADING)/%.cc
 	@echo "============="
 	@echo Building dependencies file for $*.o
 	@$(SHELL) -ec '$(CXX) -M $(CXXFLAGS) $< | sed "s^$*.o^$(TREEREADING)/../obj/$*.o^" > $@'
+	
+	
 
 -include $(DEPENDS)
 

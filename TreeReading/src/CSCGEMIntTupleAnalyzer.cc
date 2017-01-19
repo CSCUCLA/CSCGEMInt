@@ -1,5 +1,4 @@
-#include "../../../AnalyzerBase/TreeReading/interface/CSCGEMIntTupleAnalyzer.h"
-
+#include "../interface/CSCGEMIntTupleAnalyzer.h"
 #include "../interface/BaseReader.h"
 
 namespace CSCGEMInt {

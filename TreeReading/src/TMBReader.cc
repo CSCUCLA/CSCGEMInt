@@ -1,6 +1,6 @@
 
-#include "../../../AnalyzerBase/TreeReading/interface/TMBReader.h"
-#include "../../../../AnalysisSupport/macros/TreeReadingWrapper.h"
+#include "../interface/TMBReader.h"
+#include "AnalysisSupport/TreeInterface/interface/TreeReadingWrapper.h"
 
 namespace CSCGEMInt{
 
