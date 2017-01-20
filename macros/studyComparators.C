@@ -3,6 +3,10 @@
 #include "TreeReading/interface/CSCGEMIntTupleAnalyzer.h"
 #include "TreeReading/interface/TMBReader.h"
 
+#include "DataFormats/interface/CSCDetId.h"
+#include "DataFormats/interface/CSCComparator.h"
+#include "DataFormats/interface/MuonDigiCollection.h"
+
 using namespace std;
 using namespace CSCGEMInt;
 
@@ -14,7 +18,14 @@ public:
   }
 
   void runAEvent() {
-	  cout << ((TMBReader*)readers.front())->comp_hs->size() <<endl;
+
+	  int nComps =0;
+	  for(CSCComparatorCollection::DigiRangeIterator it = ((TMBReader*)readers.front())->comparators->begin();
+		it != ((TMBReader*)readers.front())->comparators->end(); ++it){
+		  auto comps = *it;
+	  	  nComps += (comps.second.second - comps.second.first);
+	  }
+	  cout << nComps <<endl;
   }
 
 

@@ -12,8 +12,9 @@ TARGET=libCSCGEMIntTupleAnalysis.so
 ASTREEINT = AnalysisSupport/TreeInterface/src
 ASUTILITIES = AnalysisSupport/Utilities/src
 TREEREADING = TreeReading/src
+DATAFORMATS = DataFormats/src
 
-SOURCE = $(wildcard $(ASTREEINT)/*.cc) $(wildcard $(ASUTILITIES)/*.cc) $(wildcard $(TREEREADING)/*.cc)
+SOURCE = $(wildcard $(ASTREEINT)/*.cc) $(wildcard $(ASUTILITIES)/*.cc) $(wildcard $(TREEREADING)/*.cc) $(wildcard $(DATAFORMATS)/*.cc)
 OBJ=$(join $(addsuffix ../obj/, $(dir $(SOURCE))), $(notdir $(SOURCE:.cc=.o))) 
 DEPENDS=$(join $(addsuffix ../.dep/, $(dir $(SOURCE))), $(notdir $(SOURCE:.cc=.d)))
 
@@ -73,6 +74,17 @@ $(TREEREADING)/../.dep/%.d: $(TREEREADING)/%.cc
 	@echo "============="
 	@echo Building dependencies file for $*.o
 	@$(SHELL) -ec '$(CXX) -M $(CXXFLAGS) $< | sed "s^$*.o^$(TREEREADING)/../obj/$*.o^" > $@'
+	
+$(DATAFORMATS)/../obj/%.o : $(DATAFORMATS)/%.cc
+	@mkdir -p $(dir $@)
+	@echo "============="
+	@echo "Compiling $<"
+	$(CXX) $(CXXFLAGS) -c $<  -o $@
+$(DATAFORMATS)/../.dep/%.d: $(DATAFORMATS)/%.cc
+	@mkdir -p $(dir $@)
+	@echo "============="
+	@echo Building dependencies file for $*.o
+	@$(SHELL) -ec '$(CXX) -M $(CXXFLAGS) $< | sed "s^$*.o^$(DATAFORMATS)/../obj/$*.o^" > $@'
 	
 	
 
