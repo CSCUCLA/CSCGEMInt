@@ -9,7 +9,7 @@
 namespace CSCGEMInt{
 
 TMBReader::TMBReader(std::string branchName) : BaseReader(branchName) {};
-TMBReader::~TMBReader() {}
+TMBReader::~TMBReader() {if(comparators) delete comparators;}
 
 void TMBReader::setup(TreeReadingWrapper * wrapper){
     wrapper->setBranchAddressPre(branchName, "comp_detID"      ,&comp_detID      ,true);
@@ -18,7 +18,7 @@ void TMBReader::setup(TreeReadingWrapper * wrapper){
 }
 
 void TMBReader::processRun() {
-	delete comparators;
+	if(comparators) delete comparators;
 	comparators = new CSCComparatorCollection;
 
 	int curIDX = 0;
